@@ -1,45 +1,68 @@
-## Sprint Roadmap
+# CodeIgniter 4 Application Starter
 
-| Sprint | Focus Area                           | Key Deliverables                                                                                        |
-|--------|--------------------------------------|---------------------------------------------------------------------------------------------------------|
-| 1      | Project Kick-off & Environment       | Laragon & Laravel scaffold; Git repo & CI pipeline; Landing-page wireframe & mockup                      |
-| 2      | User Authentication & Landing Page   | Responsive landing page; Registration & login (email/password); Email verification                       |
-| 3      | RBAC & User Profiles                 | Role definitions & middleware; Access control; Profile CRUD UI                                           |
-| 4      | Course Management – Backend Core     | Courses/modules/lessons schema & models; Admin CRUD; Seed sample TESDA-aligned course                    |
-| 5      | Course Management – Front-end & UX   | Course catalog view; Enrollment workflows; Prerequisite checks                                           |
-| 6      | Content Delivery & Resource Library  | Lesson viewers (video, PDF); Resource upload & tagging; Search                                           |
-| 7      | Assessment Engine                    | Quiz engine (MCQ/T-F/short-answer); Assignment submissions; Grading UI                                   |
-| 8      | Competency Tracking & Certificates   | Progress dashboard; Competency pass/fail logic; PDF certificate generation                               |
-| 9      | Notifications & Communication        | In-app & email notifications; Discussion forums; Digest scheduler                                        |
-| 10     | Reporting & Analytics                | Enrollment/completion dashboards; CSV/XLSX exports; TESDA compliance reports                             |
-| 11     | Integration, Security & Performance  | Production storage (S3) setup; Redis caching & queues; 2FA & audit logs                                  |
-| 12     | Testing, QA & Polish                 | Unit & feature tests (≥80% coverage); UX polish & responsive fixes; Accessibility audit                  |
-| 13     | Deployment & Documentation           | Hostinger deployment scripts; User & admin docs; UAT & go-live checklist                                |
-| 14     | Post-Launch Support & Iteration      | Bug-fix sprint; Performance monitoring; Backlog grooming                                                  |
+## What is CodeIgniter?
 
-## User Stories
+CodeIgniter is a PHP full-stack web framework that is light, fast, flexible and secure.
+More information can be found at the [official site](https://codeigniter.com).
 
-### Admin
-- As an **Admin**, I want to create and manage user accounts so that I can control access levels.  
-- As an **Admin**, I want to assign roles and permissions so that I can enforce proper access control.  
-- As an **Admin**, I want to define and organize courses, modules, and lessons so that TESDA-aligned curricula are accurately represented.  
-- As an **Admin**, I want to view reports on enrollments, completions, and assessments so that I can measure performance.  
-- As an **Admin**, I want to configure system settings (email templates, certificates) so that the LMS reflects our branding.  
-- As an **Admin**, I want to schedule automated reports so that stakeholders receive timely updates.
+This repository holds a composer-installable app starter.
+It has been built from the
+[development repository](https://github.com/codeigniter4/CodeIgniter4).
 
-### Trainer
-- As a **Trainer**, I want to build and edit course content (videos, PDFs, SCORM) so that learners have all necessary resources.  
-- As a **Trainer**, I want to create quizzes and assignments so that I can assess competencies.  
-- As a **Trainer**, I want to grade submissions and provide feedback so that students know how to improve.  
-- As a **Trainer**, I want to post announcements and send notifications so that learners stay informed.  
-- As a **Trainer**, I want to moderate discussion forums so that learners can collaborate safely.  
-- As a **Trainer**, I want to track individual and cohort progress dashboards so that I can intervene when needed.
+More information about the plans for version 4 can be found in [CodeIgniter 4](https://forum.codeigniter.com/forumdisplay.php?fid=28) on the forums.
 
-### Student
-- As a **Student**, I want to browse and search courses so that I can find programs that match my goals.  
-- As a **Student**, I want to register and enroll in courses so that I can start learning immediately.  
-- As a **Student**, I want to access lessons (video, PDF, links) in a mobile-responsive interface so that I can learn anywhere.  
-- As a **Student**, I want to take quizzes and submit assignments so that I can demonstrate mastery.  
-- As a **Student**, I want to view my progress dashboard and download certificates so that I can track my achievements.  
-- As a **Student**, I want to participate in discussions and message trainers so that I can get help.  
-- As a **Student**, I want to receive notifications for deadlines so that I never miss an important update.  
+You can read the [user guide](https://codeigniter.com/user_guide/)
+corresponding to the latest version of the framework.
+
+## Installation & updates
+
+`composer create-project codeigniter4/appstarter` then `composer update` whenever
+there is a new release of the framework.
+
+When updating, check the release notes to see if there are any changes you might need to apply
+to your `app` folder. The affected files can be copied or merged from
+`vendor/codeigniter4/framework/app`.
+
+## Setup
+
+Copy `env` to `.env` and tailor for your app, specifically the baseURL
+and any database settings.
+
+## Important Change with index.php
+
+`index.php` is no longer in the root of the project! It has been moved inside the *public* folder,
+for better security and separation of components.
+
+This means that you should configure your web server to "point" to your project's *public* folder, and
+not to the project root. A better practice would be to configure a virtual host to point there. A poor practice would be to point your web server to the project root and expect to enter *public/...*, as the rest of your logic and the
+framework are exposed.
+
+**Please** read the user guide for a better explanation of how CI4 works!
+
+## Repository Management
+
+We use GitHub issues, in our main repository, to track **BUGS** and to track approved **DEVELOPMENT** work packages.
+We use our [forum](http://forum.codeigniter.com) to provide SUPPORT and to discuss
+FEATURE REQUESTS.
+
+This repository is a "distribution" one, built by our release preparation script.
+Problems with it can be raised on our forum, or as issues in the main repository.
+
+## Server Requirements
+
+PHP version 8.1 or higher is required, with the following extensions installed:
+
+- [intl](http://php.net/manual/en/intl.requirements.php)
+- [mbstring](http://php.net/manual/en/mbstring.installation.php)
+
+> [!WARNING]
+> - The end of life date for PHP 7.4 was November 28, 2022.
+> - The end of life date for PHP 8.0 was November 26, 2023.
+> - If you are still using PHP 7.4 or 8.0, you should upgrade immediately.
+> - The end of life date for PHP 8.1 will be December 31, 2025.
+
+Additionally, make sure that the following extensions are enabled in your PHP:
+
+- json (enabled by default - don't turn it off)
+- [mysqlnd](http://php.net/manual/en/mysqlnd.install.php) if you plan to use MySQL
+- [libcurl](http://php.net/manual/en/curl.requirements.php) if you plan to use the HTTP\CURLRequest library
